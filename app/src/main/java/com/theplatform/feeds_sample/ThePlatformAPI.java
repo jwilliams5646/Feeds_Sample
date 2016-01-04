@@ -1,5 +1,6 @@
 package com.theplatform.feeds_sample;
 
+import com.theplatform.feeds_sample.FeedModels.Feed;
 import com.theplatform.feeds_sample.TokenModels.SignIn;
 
 import java.util.Map;
@@ -15,4 +16,7 @@ public interface ThePlatformAPI {
 
 @GET("Authentication/signIn?schema=1.1&form=json")
     Call<SignIn> signIn(@QueryMap Map<String,String> login);
+
+    @GET("?form=cjson&fields=title,description,content.plfile$url,defaultThumbnailURL")
+    Call<Feed> getFeed();
 }

@@ -5,7 +5,17 @@
         <item
             android:id="@+id/nav_generic_feed"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Generic Feed" />
+            android:title="Brian's Feed" />
+        <item
+            android:id="@+id/danny"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Danny's Feed" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/adk_sample"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="ADK player" />
     </group>
 
 </menu>

@@ -1,5 +1,6 @@
 package com.theplatform.feeds_sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.Toast;
 
-public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.theplatform.feeds_sample.FeedModels.Entry;
+import com.theplatform.feeds_sample.FeedModels.Feed;
+
+import java.util.ArrayList;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
+
+public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Callback<Feed> {
+
+    GridView theGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +37,24 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        theGrid = (GridView)findViewById(R.id.gridView);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        drawer.openDrawer(GravityCompat.START);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -78,15 +97,34 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Retrofit retrofit = null;
 
         if (id == R.id.nav_generic_feed) {
-            // Handle the camera action
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://feed.theplatform.com/f/TByuTC/98FtBJI0hwRU")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+/*            // prepare call in Retrofit 2.0
+            ThePlatformAPI ThePlatformAPI = retrofit.create(ThePlatformAPI.class);
+
+            Call<Feed> call = ThePlatformAPI.getFeed();
+            //asynchronous call
+            call.enqueue(this);*/
         }
-/*        else if (id == R.id.nav_gallery) {
+        else if (id == R.id.danny) {
 
-        } else if (id == R.id.nav_slideshow) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://feed.theplatform.com/f/S2CS5B/aRS3vfDOBAT9")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.adk_sample) {
+            Intent intent = new Intent(this, PlayerActivity.class);
+            startActivity(intent);
+        }
+/*        else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
@@ -94,8 +132,33 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
 
         }*/
 
+        // prepare call in Retrofit 2.0
+        if(retrofit != null) {
+            ThePlatformAPI ThePlatformAPI = retrofit.create(ThePlatformAPI.class);
+
+            Call<Feed> call = ThePlatformAPI.getFeed();
+            //asynchronous call
+            call.enqueue(this);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onResponse(Response<Feed> response, Retrofit retrofit) {
+        ArrayList<Entry> responses = (ArrayList<Entry>) response.body().getEntries();
+        FeedsAdapter adapter = new FeedsAdapter(responses,this);
+        if (theGrid != null) {
+            theGrid.setAdapter(adapter);
+        }
+
+    }
+
+    @Override
+    public void onFailure(Throwable t) {
+        t.printStackTrace();
+        Toast.makeText(Navigation.this, "There was a problem with the request", Toast.LENGTH_SHORT).show();
     }
 }
