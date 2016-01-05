@@ -33,12 +33,25 @@ public class PlayerActivity extends Activity
 {
     private Player player;
     private ADKMediaController adkMediaController;
+    EditText enterUrl;// = (EditText) findViewById(R.id.edit_message);
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+        enterUrl = (EditText) findViewById(R.id.edit_message);
+        String urLink = null;
+        try{
+            Intent intent = getIntent();
+            urLink = intent.getStringExtra("link") + "&mbr=true";
+        }catch(Exception e){
+            Toast.makeText(this,"Not from a feed", Toast.LENGTH_LONG);
+        }
+
+        if(urLink!=null){
+            enterUrl.setText(urLink);
+        }
 
         /**********************************************************************
          *
@@ -273,7 +286,7 @@ public class PlayerActivity extends Activity
          *
          **********************************************************************/
 
-        final EditText enterUrl = (EditText) findViewById(R.id.edit_message);
+
         enterUrl.setSingleLine();
 
         final Activity activity = this;
@@ -398,7 +411,7 @@ public class PlayerActivity extends Activity
         super.onResume();
     }
 
-    @Override
+/*    @Override
     public boolean onKeyDown(int keyCode, KeyEvent keyEvent)
     {
         Debug.get()
@@ -409,8 +422,8 @@ public class PlayerActivity extends Activity
             Debug.get()
                     .log("ADKDemo, onKeyDown: keyCode is KEYCODE_BACK, returning false");
             moveTaskToBack(true);
-            return false;
+            return true;
         }
         return super.onKeyDown(keyCode, keyEvent);
-    }
+    }*/
 }

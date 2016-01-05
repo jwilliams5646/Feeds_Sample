@@ -99,24 +99,17 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
         int id = item.getItemId();
         Retrofit retrofit = null;
 
-        if (id == R.id.nav_generic_feed) {
+        if (id == R.id.nav_default) {
+
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://feed.theplatform.com/f/5MILfC/f0yJi9gv9YPo")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        else if (id == R.id.nav_generic_feed) {
 
             retrofit = new Retrofit.Builder()
                     .baseUrl("http://feed.theplatform.com/f/TByuTC/98FtBJI0hwRU")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-/*            // prepare call in Retrofit 2.0
-            ThePlatformAPI ThePlatformAPI = retrofit.create(ThePlatformAPI.class);
-
-            Call<Feed> call = ThePlatformAPI.getFeed();
-            //asynchronous call
-            call.enqueue(this);*/
-        }
-        else if (id == R.id.danny) {
-
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://feed.theplatform.com/f/S2CS5B/aRS3vfDOBAT9")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

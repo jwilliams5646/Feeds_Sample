@@ -2,6 +2,9 @@ package com.theplatform.feeds_sample;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,13 +63,13 @@ public class FeedsAdapter extends BaseAdapter {
             response = (Response)convertView.getTag();
         }
 
-        Entry content = responses.get(position);
+        final Entry content = responses.get(position);
         response.title.setText(content.getTitle());
-        response.description.setText(content.getDescription());
+        //response.description.setText(content.getDescription());
         if(!content.getDefaultThumbnailUrl().isEmpty()) {
             Picasso.with(context)
                     .load(content.getDefaultThumbnailUrl())
-                    .resize(100, 100)
+                    .fit()
                     .centerCrop()
                     .placeholder(R.drawable.happy)
                     .into(response.thumbnail);
@@ -75,6 +78,16 @@ public class FeedsAdapter extends BaseAdapter {
                     .load(R.drawable.happy)
                     .into(response.thumbnail);
         }
+
+        response.thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                content.getContent().get(0).getUrl();
+                Intent intent = new Intent(context,PlayerActivity.class);
+                intent.putExtra("link", content.getContent().get(0).getUrl());
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
     }
