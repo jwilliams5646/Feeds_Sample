@@ -83,7 +83,7 @@ public class FeedsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 content.getContent().get(0).getUrl();
-                Intent intent = new Intent(context,PlayerActivity.class);
+                Intent intent = new Intent(context,FeedPlayerActivity.class);
                 intent.putExtra("link", content.getContent().get(0).getUrl());
                 context.startActivity(intent);
             }

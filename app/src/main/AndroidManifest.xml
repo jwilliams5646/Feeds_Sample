@@ -13,7 +13,8 @@
         <activity
             android:name=".Navigation"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +27,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlayerActivity"
-            android:label="@string/title_activity_player"></activity>
+            android:label="@string/title_activity_player" />
+        <activity
+            android:name=".FeedPlayerActivity"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_feed_player"
+            android:parentActivityName=".Navigation"
+            android:theme="@style/FullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.theplatform.feeds_sample.Navigation" />
+        </activity>
     </application>
 
 </manifest>

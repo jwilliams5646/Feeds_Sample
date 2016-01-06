@@ -96,6 +96,7 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        item.setChecked(true);
         int id = item.getItemId();
         Retrofit retrofit = null;
 
