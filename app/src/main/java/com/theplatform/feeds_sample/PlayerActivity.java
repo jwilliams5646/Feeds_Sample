@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,8 +38,7 @@ public class PlayerActivity extends Activity
     EditText enterUrl;// = (EditText) findViewById(R.id.edit_message);
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
         enterUrl = (EditText) findViewById(R.id.edit_message);

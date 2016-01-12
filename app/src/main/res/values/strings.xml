@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Feeds Samples</string>
+    <string name="app_name">thePlatform</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,4 +12,8 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="home">Home</string>
+    <string name="feed_test">Feed Test</string>
+    <string name="adk">ADK player</string>
 </resources>

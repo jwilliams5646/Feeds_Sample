@@ -71,7 +71,7 @@ public class FeedsAdapter extends BaseAdapter {
                     .load(content.getDefaultThumbnailUrl())
                     .fit()
                     .centerCrop()
-                    .placeholder(R.drawable.happy)
+                    .placeholder(R.drawable.default_background)
                     .into(response.thumbnail);
         }else{
             Picasso.with(context)

@@ -4,18 +4,18 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_default"
-            android:icon="@android:drawable/ic_menu_mylocation"
-            android:title="Home" />
+            android:icon="@drawable/ic_menu_home"
+            android:title="@string/home" />
         <item
-            android:id="@+id/nav_generic_feed"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Brian's Feed" />
+            android:id="@+id/nav_test_feed"
+            android:icon="@drawable/ic_search_icon"
+            android:title="@string/feed_test" />
     </group>
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/adk_sample"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="ADK player" />
+            android:icon="@drawable/ic_menu_media"
+            android:title="@string/adk" />
     </group>
 
 </menu>
